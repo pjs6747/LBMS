@@ -47,20 +47,22 @@ public class Visit {
    * Gets startDate
    * @return visit startDate
    */
-  public String getStartDate() {
-    return startTime;
+  public String getDate() {
+    return Date;
   }
+
+  public String getStartTime(){return startTime;}
 
   /**
    * Gets endDate
    * @return visit endDate
    */
-  public String getEndDate() {
+  public String getEndTime() {
     return endTime;
   }
 
   @Override
   public String toString() {
-    return visitor.toString() + "visited on" + Date + "at" + startTime + "and left at" + endTime;
+    return visitor + " visited on " + Date + " at " + startTime + " and left at " + endTime;
   }
 }
