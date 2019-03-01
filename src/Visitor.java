@@ -18,15 +18,15 @@ public class Visitor{
   /**
    * Phone Number of Visitor
    */
-  private int phoneNumber;
+  private long phoneNumber;
 
   /**
    * Unique 10 digit visitor ID
    */
-  private int visitorID;
+  private long visitorID;
 
 
-  public void Visitor(String firstName, String lastName, String address, int phoneNumber, int visitorID){
+  public Visitor(String firstName, String lastName, String address, long phoneNumber, long visitorID){
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
@@ -62,7 +62,7 @@ public class Visitor{
    * Gets phoneNumber
    * @return visitor phoneNumber
    */
-  public int getPhoneNumber(){
+  public long getPhoneNumber(){
     return phoneNumber;
   }
 
@@ -70,7 +70,7 @@ public class Visitor{
    * Gest ID
    * @return visitorID
    */
-  public int getVisitorID(){
+  public long getVisitorID(){
     return visitorID;
   }
 

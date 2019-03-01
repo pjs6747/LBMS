@@ -21,7 +21,7 @@ public class Visit {
   private String endTime;
 
 
-  public void Visit(Visitor visitor, String date, String startTime){
+  public Visit(Visitor visitor, String date, String startTime){
     this.visitor = visitor;
     this.startTime = startTime;
     this.Date = date;
