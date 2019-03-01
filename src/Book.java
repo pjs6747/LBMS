@@ -4,7 +4,7 @@ public class Book {
   /**
    * The isbn of the book
    */
-  private int isbn;
+  private long isbn;
 
   /**
    * The title of the book
@@ -42,7 +42,7 @@ public class Book {
   private int copiesCheckedOut;
 
 
-  public void Book(int isbn, String title, String author, String publisher, String publishDate, int pageCount, int copies){
+  public Book(long isbn, String title, String author, String publisher, String publishDate, int pageCount, int copies){
     this.isbn = isbn;
     this.title = title;
     this.author = author;
@@ -57,7 +57,7 @@ public class Book {
    * Gets isbn
    * @return Book isbn
    */
-  public int getIsbn() {
+  public long getIsbn() {
     return isbn;
   }
 
