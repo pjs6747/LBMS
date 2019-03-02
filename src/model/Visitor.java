@@ -1,5 +1,8 @@
 package model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Visitor{
 
   /**
@@ -27,6 +30,11 @@ public class Visitor{
    */
   private long visitorID;
 
+  /**
+   *Keeps a list of all transactions (checked out boks) of a user
+   */
+  private ArrayList<Transaction> transactions;
+
 
   public Visitor(String firstName, String lastName, String address, long phoneNumber, long visitorID){
     this.firstName = firstName;
@@ -34,6 +42,7 @@ public class Visitor{
     this.address = address;
     this.phoneNumber = phoneNumber;
     this.visitorID = visitorID;
+    this.transactions = new ArrayList<>();
   }
 
   /**
@@ -43,6 +52,12 @@ public class Visitor{
   public String getFirstName() {
     return firstName;
   }
+
+  /**
+   * Gets all Transactions
+   * @return visitors transactions
+   */
+  public ArrayList<Transaction> getTransactions() { return transactions; }
 
   /**
    * Gets lastName

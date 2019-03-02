@@ -44,14 +44,14 @@ public class Book {
   private int copiesCheckedOut;
 
 
-  public Book(long isbn, String title, String author, String publisher, String publishDate, int pageCount){
+  public Book(long isbn, String title, String author, String publisher, String publishDate, int pageCount, int copies){
     this.isbn = isbn;
     this.title = title;
     this.author = author;
     this.publisher = publisher;
     this.publishDate = publishDate;
     this.PageCount = pageCount;
-    this.copies = 1;
+    this.copies = copies;
     this.copiesCheckedOut = 0;
   }
 
