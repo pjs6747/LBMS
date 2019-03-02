@@ -22,12 +22,17 @@ public class Transaction {
     /***
      * Dated the book is due back
      */
-    String dueBack; //7days before they need to bring it back. 5 books out max. dates stored as 00/00/00
+    String dueBack;
 
     /***
      * How much a visitor owes for a late book
      */
     int fine;
+
+    /***
+     * Is the book returned
+     */
+    boolean isReturned;
 
     public Transaction(Book book, Visit visit){
         this.book = book;
@@ -35,6 +40,7 @@ public class Transaction {
         this.checkOutDate = visit.getDate();
         this.fine = 0;
         this.dueBack = this.calculateDueBack();
+        //this.isReturned = false;
     }
 
     /**
@@ -59,6 +65,18 @@ public class Transaction {
         String dueDate = Integer.toString(intDate[0])+ "/" + Integer.toString(intDate[1])+ "/"+ Integer.toString(intDate[2]);
         return dueDate;
     }
+
+    /**
+     * Calculates the amount a visitor owes based on how many days
+     * it is after the dueDate.
+     */
+//    public void increaseFine(){
+//        if (date +1 over duedate){
+//            fine += 10;
+//        }else{
+//            fine+=2;
+//        }
+//    }
 
     /**
      * Gets Book
