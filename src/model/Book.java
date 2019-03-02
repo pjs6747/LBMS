@@ -44,15 +44,19 @@ public class Book {
   private int copiesCheckedOut;
 
 
-  public Book(long isbn, String title, String author, String publisher, String publishDate, int pageCount, int copies){
+  public Book(long isbn, String title, String author, String publisher, String publishDate, int pageCount){
     this.isbn = isbn;
     this.title = title;
     this.author = author;
     this.publisher = publisher;
     this.publishDate = publishDate;
     this.PageCount = pageCount;
-    this.copies = copies;
+    this.copies = 1;
     this.copiesCheckedOut = 0;
+  }
+
+  public void addCopy(){
+    this.copies++;
   }
 
   /**
@@ -128,6 +132,15 @@ public class Book {
       copies--;
       copiesCheckedOut++;
       return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean equals(Object o){
+    if (o instanceof Book){
+      Book other = (Book) o;
+      return (this.isbn == other.isbn);
     }
     return false;
   }
