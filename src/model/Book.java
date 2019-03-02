@@ -51,7 +51,7 @@ public class Book {
     this.publisher = publisher;
     this.publishDate = publishDate;
     this.PageCount = pageCount;
-    this.copies = 1;
+    this.copies = copies;
     this.copiesCheckedOut = 0;
   }
 

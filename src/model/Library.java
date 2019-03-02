@@ -14,12 +14,15 @@ public class Library {
       return this.books;
     }
 
-    public void addBooks(ArrayList<Book> books){
-      for (Book book : books){
+    public void addBooks(ArrayList<Book> booksToAdd){
+      for (Book book : booksToAdd){
         if (this.books.contains(book)){
           int numberCopies = book.getCopies();
           int index = this.books.lastIndexOf(book);
           this.books.get(index).addCopies(numberCopies);
+        }
+        else{
+          this.books.add(book);
         }
       }
     }

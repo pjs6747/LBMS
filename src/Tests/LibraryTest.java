@@ -12,7 +12,7 @@ public class LibraryTest {
 
   @Before
   public void setUp() throws Exception {
-    this.library = new Library("test");
+    this.library = new Library();
     System.out.println("hey");
   }
 

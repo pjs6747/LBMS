@@ -21,7 +21,7 @@ public class LBMS {
     visits = new ArrayList<>();
     visitors = new ArrayList<>();
     openVisits = new ArrayList<>();
-    bookStoreFile = new File("LBMS\\SRC\\Files\\books");
+    bookStoreFile = new File("SRC\\Files\\books");
   }
 
 
@@ -73,6 +73,7 @@ public class LBMS {
         counter--;
       }
     }
+    library.addBooks(booksToAdd);
   }
 
 
