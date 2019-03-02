@@ -1,10 +1,11 @@
+package model;
+
 public class Visit {
 
   /**
    * Visitor makeing the visit
    */
   private Visitor visitor;
-
   /**
    * Date of the visit
    */
