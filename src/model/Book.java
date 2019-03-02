@@ -55,8 +55,8 @@ public class Book {
     this.copiesCheckedOut = 0;
   }
 
-  public void addCopy(){
-    this.copies++;
+  public void addCopies(int number){
+    this.copies += number;
   }
 
   /**

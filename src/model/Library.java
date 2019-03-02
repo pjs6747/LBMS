@@ -18,4 +18,15 @@ public class Library {
     public ArrayList<Book> getBooks () {
       return this.books;
     }
+
+    public void addBooks(ArrayList<Book> books){
+      for (Book book : books){
+        if (this.books.contains(book)){
+          int numberCopies = book.getCopies();
+          int index = this.books.lastIndexOf(book);
+          this.books.get(index).addCopies(numberCopies);
+        }
+      }
+
+    }
   }
