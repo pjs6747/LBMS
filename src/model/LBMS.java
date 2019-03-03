@@ -12,6 +12,7 @@ public class LBMS {
   ArrayList<Visit> visits;
   ArrayList<Visitor> visitors;
   ArrayList<Visit> openVisits;
+  ArrayList<Transaction> transactions;
   File bookStoreFile;
 
 
@@ -21,6 +22,7 @@ public class LBMS {
     visits = new ArrayList<>();
     visitors = new ArrayList<>();
     openVisits = new ArrayList<>();
+    transactions = new ArrayList<>();
     bookStoreFile = new File("SRC\\Files\\books");
   }
 
@@ -31,12 +33,7 @@ public class LBMS {
 
 
   public void startVisit(long ID){
-    for (Visitor visitor : visitors){
-      if (visitor.getVisitorID() == ID){
-        this.openVisits.add(new Visit(visitor, "Temp", "Temp"));
-        return;
-      }
-    }
+    this.openVisits.add(new Visit(findVisitor(ID), "TEMP", "TEMP"));
   }
 
   public void endVisit(long ID) {
@@ -75,6 +72,44 @@ public class LBMS {
     }
     library.addBooks(booksToAdd);
   }
+
+
+  public void borrowBook(long id, ArrayList<String> books){
+    Visitor visitor = findVisitor(id);
+    Visit visit = findVisit(visitor);
+    ArrayList<Book> booksToBorrow = library.borrowBooks(books);
+    for (Book bookToBorrow : booksToBorrow){
+      if (bookToBorrow.checkBook()) {
+        Transaction newTrans = new Transaction(bookToBorrow, visit);
+        this.transactions.add(newTrans);
+      }
+    }
+
+  }
+
+  public ArrayList<Transaction> findBorrowedBooks(){
+    return this.transactions;
+  }
+
+
+  private Visitor findVisitor(long id){
+    for (Visitor visitor : visitors){
+      if (visitor.getVisitorID() == id){
+        return visitor;
+      }
+    }
+    return null;
+  }
+
+  private Visit findVisit (Visitor visitor){
+    for (Visit visit : openVisits){
+      if (visit.getVisitor().equals(visitor)){
+        return visit;
+      }
+    }
+    return null;
+  }
+
 
 
 
