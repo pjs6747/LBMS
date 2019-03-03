@@ -94,7 +94,7 @@ public class Time extends Thread {
         }
         return timeCase;
     }
-    
+
     /**
      * Advances the date by number of days.
      * @param days: number of days to advance date
