@@ -1,4 +1,4 @@
-package model.State;
+package model.state;
 
 /**
  * Implementation of Library state made to use the 'State' design pattern

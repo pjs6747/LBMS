@@ -16,12 +16,16 @@ public class CommandLine{
         BufferedReader br = new BufferedReader(ir);
         ClientRequest cr = new ClientRequest();
 
-        System.out.println("Welcome to the Library. Type in a request to get started\n>");
+        System.out.println("Welcome to the Library. Type in a request to get started.\nIf you are new to the library, please type in 'login;'.");
 
         try {
             inputString = br.readLine();
             System.out.println("you said: " + inputString);
             System.out.println(cr.validateRequest(inputString));
+            if(cr.validateRequest(inputString) == "partial request"){
+                inputString = br.readLine();
+                System.out.println(cr.validateRequest(inputString));
+            }
         } catch (Exception e) {
             //TODO: handle exception
             System.out.println("You goofed up: " + e);

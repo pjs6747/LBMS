@@ -10,13 +10,22 @@ package controller;
 
     public String validateRequest(String r){
         
-        if(r.endsWith(";"))
-            return "Command successful";
+        if(!r.endsWith(";"))
+            return "partial request";
         else
-            return "bruh good try";
+            return execute(r);
     }
 
-    public void execute(){}
+    public String execute(String r) {
+        String request = "";
+
+        switch(r){
+            case("login;"):
+            request = "Type in your first name, last name, address, and phone number";
+        }
+
+        return request;
+    }
 
 
  }
