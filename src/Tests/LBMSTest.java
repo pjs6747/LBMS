@@ -1,5 +1,6 @@
 package Tests;
 
+import model.Book;
 import model.LBMS;
 import model.Visit;
 import model.Visitor;
@@ -55,5 +56,22 @@ public class LBMSTest {
     otherISBNS.add(9781450431835L);
     this.lbms.buyBooks(otherISBNS, 3);
     System.out.println("Test");
+  }
+
+  @Test
+  public void borrowBooks() throws FileNotFoundException{
+    lbms.registerVisitor(v1);
+    lbms.startVisit(v1.getVisitorID());
+    ArrayList isbns = new ArrayList();
+    isbns.add(9781450431835L);
+    isbns.add(9780375896798L);
+    lbms.buyBooks(isbns, 2);
+    lbms.borrowBook(v1.getVisitorID(), isbns);
+    System.out.println(":");
+  }
+
+  @Test
+  public void findBorrowedBooks(){
+
   }
 }

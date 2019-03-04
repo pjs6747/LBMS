@@ -39,7 +39,7 @@ public class Transaction {
         this.visitor = visit.getVisitor();
         this.checkOutDate = visit.getDate();
         this.fine = 0;
-        this.dueBack = this.calculateDueBack();
+//        this.dueBack = this.calculateDueBack();
         //this.isReturned = false;
     }
 
