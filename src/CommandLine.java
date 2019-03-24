@@ -11,6 +11,7 @@ public class CommandLine{
     
     public static void main(String args[]){
         String inputString;
+        String validCommmand;
 
         InputStreamReader ir = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(ir);
@@ -21,11 +22,13 @@ public class CommandLine{
         try {
             inputString = br.readLine();
             System.out.println("you said: " + inputString);
-            System.out.println(cr.validateRequest(inputString));
-            if(cr.validateRequest(inputString) == "partial request"){
-                inputString = br.readLine();
-                System.out.println(cr.validateRequest(inputString));
+            while(cr.validateRequest(inputString).equals("partial request")){
+                System.out.println(cr.PARTIAL_REQUEST);
+                inputString += br.readLine();
+
             }
+
+
         } catch (Exception e) {
             //TODO: handle exception
             System.out.println("You goofed up: " + e);
