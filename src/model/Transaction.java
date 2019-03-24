@@ -1,6 +1,9 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Transaction {
 
@@ -17,17 +20,12 @@ public class Transaction {
     /***
      * Dated that the book is checked out
      */
-    String checkOutDate;
+    LocalDate checkOutDate;
 
     /***
      * Dated the book is due back
      */
-    String dueBack;
-
-    /***
-     * How much a visitor owes for a late book
-     */
-    int fine;
+    LocalDate dueBack;
 
     /***
      * Is the book returned
@@ -38,45 +36,8 @@ public class Transaction {
         this.book = book;
         this.visitor = visit.getVisitor();
         this.checkOutDate = visit.getDate();
-        this.fine = 0;
-//        this.dueBack = this.calculateDueBack();
-        //this.isReturned = false;
+        this.dueBack = checkOutDate.plusDays(7);
     }
-
-    /**
-     * Calculates the dueDate of a book based on the checked
-     * out date. A visitor has 7 days to bring the book back.
-     */
-    public String calculateDueBack(){
-        String [] date = checkOutDate.split("/");
-        int [] intDate = new int [3];
-        for (int i=0; i<3; i++){
-            intDate[i] = (Integer.parseInt(date[i]));
-        }
-        intDate[1]+= 7;
-        if (intDate[1]>30){
-            intDate[0] +=1;
-            intDate[1]-= 30;
-        }
-        if (intDate[0]> 12){
-            intDate[2]+=1;
-            intDate[0]-=12;
-        }
-        String dueDate = Integer.toString(intDate[0])+ "/" + Integer.toString(intDate[1])+ "/"+ Integer.toString(intDate[2]);
-        return dueDate;
-    }
-
-    /**
-     * Calculates the amount a visitor owes based on how many days
-     * it is after the dueDate.
-     */
-//    public void increaseFine(){
-//        if (date +1 over duedate){
-//            fine += 10;
-//        }else{
-//            fine+=2;
-//        }
-//    }
 
     /**
      * Gets Book
@@ -94,5 +55,26 @@ public class Transaction {
      * Gets DueBackDate
      * @return String dueBackDate
      */
-    public String getDueBack() { return dueBack; }
+    public LocalDate getDueBack() { return dueBack; }
+
+  public long getFine(LocalDate dateReturned) {
+      long daysLate = DAYS.between(dueBack, dateReturned);
+      //Book is returned one week late
+      if (daysLate > 0 && daysLate <= 7){
+        return 10;
+      }
+      //Book is returned more than one week late
+      else if (daysLate > 7 && daysLate <= 17){
+        long additionalCharge = 2*(daysLate-7);
+        return 10 + additionalCharge;
+      }
+      //Book reached its maximum fine
+      else if (daysLate > 10){
+        return 30;
+      }
+      //Book is not late
+      else {
+        return 0;
+      }
+  }
 }

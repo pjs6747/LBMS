@@ -1,9 +1,6 @@
 package Tests;
 
-import model.Book;
-import model.LBMS;
-import model.Visit;
-import model.Visitor;
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 
