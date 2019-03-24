@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Transaction {
@@ -17,12 +18,12 @@ public class Transaction {
     /***
      * Dated that the book is checked out
      */
-    String checkOutDate;
+    LocalDate checkOutDate;
 
     /***
      * Dated the book is due back
      */
-    String dueBack;
+    LocalDate dueBack;
 
     /***
      * How much a visitor owes for a late book
@@ -38,32 +39,10 @@ public class Transaction {
         this.book = book;
         this.visitor = visit.getVisitor();
         this.checkOutDate = visit.getDate();
+        this.dueBack = checkOutDate.plusDays(7);
         this.fine = 0;
-//        this.dueBack = this.calculateDueBack();
-        //this.isReturned = false;
-    }
 
-    /**
-     * Calculates the dueDate of a book based on the checked
-     * out date. A visitor has 7 days to bring the book back.
-     */
-    public String calculateDueBack(){
-        String [] date = checkOutDate.split("/");
-        int [] intDate = new int [3];
-        for (int i=0; i<3; i++){
-            intDate[i] = (Integer.parseInt(date[i]));
-        }
-        intDate[1]+= 7;
-        if (intDate[1]>30){
-            intDate[0] +=1;
-            intDate[1]-= 30;
-        }
-        if (intDate[0]> 12){
-            intDate[2]+=1;
-            intDate[0]-=12;
-        }
-        String dueDate = Integer.toString(intDate[0])+ "/" + Integer.toString(intDate[1])+ "/"+ Integer.toString(intDate[2]);
-        return dueDate;
+
     }
 
     /**
@@ -94,5 +73,5 @@ public class Transaction {
      * Gets DueBackDate
      * @return String dueBackDate
      */
-    public String getDueBack() { return dueBack; }
+    public LocalDate getDueBack() { return dueBack; }
 }

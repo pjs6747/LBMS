@@ -33,7 +33,7 @@ public class Time extends Thread {
     /**
      * Constructor for a Time. time will start at the current time
      */
-    private Time() {
+    public Time() {
         this.time = LocalDateTime.now();
     }
 

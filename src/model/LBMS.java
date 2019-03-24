@@ -14,6 +14,7 @@ public class LBMS {
   ArrayList<Visit> openVisits;
   ArrayList<Transaction> transactions;
   File bookStoreFile;
+  Time currentTime;
 
 
 
@@ -24,6 +25,7 @@ public class LBMS {
     openVisits = new ArrayList<>();
     transactions = new ArrayList<>();
     bookStoreFile = new File("SRC\\Files\\books");
+    this.currentTime = new Time();
   }
 
 
@@ -33,7 +35,7 @@ public class LBMS {
 
 
   public void startVisit(long ID){
-    this.openVisits.add(new Visit(findVisitor(ID), "TEMP", "TEMP"));
+    this.openVisits.add(new Visit(findVisitor(ID), currentTime.getDate(),currentTime.getTime()));
   }
 
   public void endVisit(long ID) {
@@ -41,7 +43,7 @@ public class LBMS {
       if (visitor.getVisitorID() == ID) {
         for (Visit visit : openVisits){
           if (visit.getVisitor().getVisitorID() == ID){
-            visit.endVisit("Temp");
+            visit.endVisit(currentTime.getTime());
             openVisits.remove(visit);
             visits.add(visit);
             return;
