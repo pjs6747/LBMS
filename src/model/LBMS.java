@@ -14,6 +14,7 @@ public class LBMS {
   ArrayList<Visit> openVisits;
   ArrayList<Transaction> transactions;
   File bookStoreFile;
+  Time startTime;
   Time currentTime;
 
 
@@ -25,7 +26,9 @@ public class LBMS {
     openVisits = new ArrayList<>();
     transactions = new ArrayList<>();
     bookStoreFile = new File("SRC\\Files\\books");
+    this.startTime = new Time();
     this.currentTime = new Time();
+    this.currentTime.run();
   }
 
 
@@ -89,9 +92,20 @@ public class LBMS {
 
   }
 
+
   public ArrayList<Transaction> findBorrowedBooks(){
     return this.transactions;
   }
+
+
+  public void changeTime(long days, int  hours){
+    this.currentTime.plusDays(days);
+    this.currentTime.plusHours(hours);
+  }
+
+
+  public Time getTime(){return this.currentTime;}
+
 
 
   private Visitor findVisitor(long id){

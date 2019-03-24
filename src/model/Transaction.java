@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class Transaction {
 
     /***
@@ -26,11 +28,6 @@ public class Transaction {
     LocalDate dueBack;
 
     /***
-     * How much a visitor owes for a late book
-     */
-    int fine;
-
-    /***
      * Is the book returned
      */
     boolean isReturned;
@@ -40,22 +37,7 @@ public class Transaction {
         this.visitor = visit.getVisitor();
         this.checkOutDate = visit.getDate();
         this.dueBack = checkOutDate.plusDays(7);
-        this.fine = 0;
-
-
     }
-
-    /**
-     * Calculates the amount a visitor owes based on how many days
-     * it is after the dueDate.
-     */
-//    public void increaseFine(){
-//        if (date +1 over duedate){
-//            fine += 10;
-//        }else{
-//            fine+=2;
-//        }
-//    }
 
     /**
      * Gets Book
@@ -74,4 +56,25 @@ public class Transaction {
      * @return String dueBackDate
      */
     public LocalDate getDueBack() { return dueBack; }
+
+  public long getFine(LocalDate dateReturned) {
+      long daysLate = DAYS.between(dueBack, dateReturned);
+      //Book is returned one week late
+      if (daysLate > 0 && daysLate <= 7){
+        return 10;
+      }
+      //Book is returned more than one week late
+      else if (daysLate > 7 && daysLate <= 17){
+        long additionalCharge = 2*(daysLate-7);
+        return 10 + additionalCharge;
+      }
+      //Book reached its maximum fine
+      else if (daysLate > 10){
+        return 30;
+      }
+      //Book is not late
+      else {
+        return 0;
+      }
+  }
 }

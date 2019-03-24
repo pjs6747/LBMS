@@ -45,4 +45,28 @@ public class TransactionTest {
   public void getDueBack() {
     assertEquals(transaction.getDueBack(), LocalDate.of(2019, 1, 8));
   }
+
+  @Test
+  public void getFineOneWeek() {
+    LocalDate oneWeek = checkoutDate.plusDays(7);
+    assertEquals(0, transaction.getFine(oneWeek));
+  }
+
+  @Test
+  public void getFineTwoWeek(){
+    LocalDate twoWeek = checkoutDate.plusDays(14);
+    assertEquals(10, transaction.getFine(twoWeek));
+  }
+
+  @Test
+  public void getFineThreeWeek(){
+    LocalDate threeWeek = checkoutDate.plusDays(21);
+    assertEquals(24, transaction.getFine(threeWeek));
+  }
+
+  @Test
+  public void getFineTenWeek(){
+    LocalDate tenWeek = checkoutDate.plusDays(70);
+    assertEquals(30, transaction.getFine(tenWeek));
+  }
 }

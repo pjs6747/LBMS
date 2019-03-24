@@ -103,12 +103,24 @@ public class Time extends Thread {
         this.time = this.time.plusDays(days);
     }
 
+    public void plusHours(long hours){ this.time = this.time.plusHours(hours);}
+
     /**
      * Creates a formatted string of the date and time.
      * @return formatted string
      */
     public String toString() {
         return this.time.format(FORMATTED_DATE_TIME);
+    }
+
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Time){
+            Time other = (Time) o;
+            return time.equals(other.getTime());
+        }
+        return false;
     }
 
 
