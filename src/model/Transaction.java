@@ -7,32 +7,32 @@ public class Transaction {
     /***
      * Book that will be checked out
      */
-    Book book;
+    private Book book;
 
     /***
      * Visitor that will be checking out a book
      */
-    Visitor visitor;
+    private Visitor visitor;
 
     /***
      * Dated that the book is checked out
      */
-    String checkOutDate;
+    private String checkOutDate;
 
     /***
      * Dated the book is due back
      */
-    String dueBack;
+    private String dueBack;
 
     /***
      * How much a visitor owes for a late book
      */
-    int fine;
+    private int fine;
 
     /***
      * Is the book returned
      */
-    boolean isReturned;
+    private boolean isReturned;
 
     public Transaction(Book book, Visit visit){
         this.book = book;
