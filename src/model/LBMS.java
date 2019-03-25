@@ -8,15 +8,32 @@ import java.util.Scanner;
 
 public class LBMS {
 
-  Library library;
-  ArrayList<Visit> oldVisits;
-  ArrayList<Visitor> visitors;
-  ArrayList<Visit> openVisits;
-  ArrayList<Transaction> transactions;
-  File bookStoreFile;
-  Time startTime;
-  Time currentTime;
-  String newUserID;
+  //Library that holds all the books
+  private Library library;
+
+  //Visits after the visitor leaves
+  private ArrayList<Visit> oldVisits;
+
+  //All registered visitors
+  private ArrayList<Visitor> visitors;
+
+  //Visits when visitor has not left
+  private ArrayList<Visit> openVisits;
+
+  //List of all customer transactions
+  private ArrayList<Transaction> transactions;
+
+  //Text File containing all book information
+  private File bookStoreFile;
+
+  //Original Time of start up
+  private Time startTime;
+
+  //Current System time
+  private Time currentTime;
+
+  //Unique ID for next new visitor
+  private String newUserID;
 
 
 
@@ -34,6 +51,13 @@ public class LBMS {
   }
 
 
+  /**
+   * Registers a Visitor to the system
+   * @param firstName First Name
+   * @param lastName Last Name
+   * @param address Address
+   * @param phoneNumber Phone Number
+   */
   public void registerVisitor(String firstName, String lastName, String address, long phoneNumber){
     Visitor visitor = new Visitor(firstName, lastName, address, phoneNumber, this.newUserID);
     int temp = Integer.parseInt(this.newUserID);
@@ -43,10 +67,19 @@ public class LBMS {
   }
 
 
+  /**
+   * Starts a visit for a specified id
+   * @param ID User ID to start
+   */
   public void startVisit(String ID){
     this.openVisits.add(new Visit(findVisitor(ID), currentTime.getDate(),currentTime.getTime()));
   }
 
+
+  /**
+   * Ends a visit for a specified id
+   * @param ID User ID to end
+   */
   public void endVisit(String ID) {
     for (Visit visit : openVisits) {
       if (visit.getVisitor().getVisitorID() == ID) {
@@ -58,6 +91,13 @@ public class LBMS {
     }
   }
 
+
+  /**
+   * Buys listed books
+   * @param ids book isbns to buy
+   * @param quantity number of each book to buy
+   * @throws FileNotFoundException
+   */
   public void buyBooks(List ids, int quantity) throws FileNotFoundException {
     Scanner sc = new Scanner(bookStoreFile);
     ArrayList<Book> booksToAdd = new ArrayList<>();
@@ -81,6 +121,11 @@ public class LBMS {
   }
 
 
+  /**
+   * Borrows books listed for specified id
+   * @param id
+   * @param books
+   */
   public void borrowBook(String id, ArrayList<Long> books){
     Visitor visitor = findVisitor(id);
     Visit visit = findVisit(visitor);
@@ -95,6 +140,10 @@ public class LBMS {
   }
 
 
+  /**
+   * Finds books that are checked out
+   * @return listed of checked out books
+   */
   public ArrayList<Transaction> findBorrowedBooks(){
     ArrayList<Transaction> checkedOut = new ArrayList<>();
     for (Transaction t : transactions){
@@ -106,6 +155,11 @@ public class LBMS {
   }
 
 
+  /**
+   * Returns specified book for specified user ID
+   * @param id user ID that returned
+   * @param books list of isbns to return
+   */
   public void returnBooks(String id, ArrayList<Long> books){
     ArrayList<Transaction> transactions = findTransactions(id, books);
     for (Transaction t : transactions){
@@ -114,18 +168,40 @@ public class LBMS {
   }
 
 
-
-
+  /**
+   * Changes time by days and hours
+   * @param days
+   * @param hours
+   */
   public void changeTime(long days, int  hours){
     this.currentTime.plusDays(days);
     this.currentTime.plusHours(hours);
   }
 
 
-  public Time getTime(){return this.currentTime;}
+  /**
+   * Gets the system time
+   * @return current time object
+   */
+  public Time getTime(){
+    return this.currentTime;
+  }
 
 
+  /**
+   * Gets original start time
+   * @return the time of start up
+   */
+  public Time getStartTime() {
+    return startTime;
+  }
 
+
+  /**
+   * Finds a visitor object from an ID
+   * @param id Visitor ID to search for
+   * @return Visitor object with the specified id
+   */
   private Visitor findVisitor(String id){
     for (Visitor visitor : visitors){
       if (visitor.getVisitorID().equals(id)){
@@ -135,6 +211,12 @@ public class LBMS {
     return null;
   }
 
+
+  /**
+   * Finds a visit from a visitor
+   * @param visitor visitor to search for
+   * @return the visit that contains specified visitor
+   */
   private Visit findVisit (Visitor visitor){
     for (Visit visit : openVisits){
       if (visit.getVisitor().equals(visitor)){
@@ -144,6 +226,13 @@ public class LBMS {
     return null;
   }
 
+
+  /**
+   * Finds transaction object from userID and list of Books
+   * @param id visitor ID to search for
+   * @param books isbns to search for
+   * @return the transactions that fit the search
+   */
   private ArrayList<Transaction> findTransactions(String id, ArrayList<Long> books){
     ArrayList<Transaction> transactions = new ArrayList<>();
     for (Transaction t : this.transactions){
@@ -153,7 +242,4 @@ public class LBMS {
     }
     return transactions;
   }
-
-
-
 }

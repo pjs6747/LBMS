@@ -15,6 +15,10 @@ public class Library {
     return this.books;
   }
 
+  /**
+   * Adds books to the library
+   * @param booksToAdd Book objects to add to library
+   */
   public void addBooks(ArrayList<Book> booksToAdd) {
     for (Book book : booksToAdd) {
       if (this.books.contains(book)) {
@@ -27,6 +31,11 @@ public class Library {
     }
   }
 
+  /**
+   * Removes books from library
+   * @param isbns isbns to remove
+   * @return list of Books borrowed
+   */
   public ArrayList<Book> borrowBooks(ArrayList isbns){
     ArrayList<Book> booksToAdd = new ArrayList<>();
     for (Book book : books) {
@@ -39,3 +48,5 @@ public class Library {
     return booksToAdd;
   }
 }
+
+

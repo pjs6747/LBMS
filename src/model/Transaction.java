@@ -57,6 +57,7 @@ public class Transaction {
      */
     public LocalDate getDueBack() { return dueBack; }
 
+
   public int getFine(LocalDate dateReturned) {
       long daysLate = DAYS.between(dueBack, dateReturned);
       //Book is returned one week late
@@ -78,10 +79,10 @@ public class Transaction {
       }
   }
 
+
   public void returnBook(Time dateReturned){
       this.isReturned = true;
       this.visitor.addBalance(getFine(dateReturned.getDate()));
+      this.book.returnBook();
   }
-
-
 }
