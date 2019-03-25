@@ -1,5 +1,7 @@
 package controller;
 
+import model.commands.Search;
+
 /**
  * This class is in charge of accepting user requests
  * and delegating them where they need to go
@@ -7,6 +9,8 @@ package controller;
  */
 
  public class ClientRequest implements Request{
+
+     public String PARTIAL_REQUEST = "partial request";
 
     public String validateRequest(String r){
         
@@ -22,6 +26,10 @@ package controller;
         switch(r){
             case("login;"):
             request = "Type in your first name, last name, address, and phone number";
+
+            case("search;"):
+                Search searchBook = new Search("no_params");
+                request = searchBook.requestParams();
         }
 
         return request;
