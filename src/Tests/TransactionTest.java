@@ -25,7 +25,7 @@ public class TransactionTest {
   public void setUp() throws Exception {
     this.checkoutDate = LocalDate.of(2019, 1, 1);
     this.checkoutTime = LocalTime.of(12, 0);
-    this.visitor = new Visitor("Tom", "Smith", "1134 Avalon", 5709139903L, 1);
+    this.visitor = new Visitor("Tom", "Smith", "1134 Avalon", 5709139903L, "0000000001");
     this.book = new Book(1, "TestBook", "Alec", "My Mom", "Temp", 312, 2);
     this.visit =new Visit(visitor, checkoutDate, checkoutTime);
     this.transaction = new Transaction(this.book, visit);

@@ -12,63 +12,47 @@ import static org.junit.Assert.*;
 
 public class LBMSTest {
 
-  LBMS lbms;
-  Visitor v1 = new Visitor("Tom", "Smith", "1134 Avalon", 5709139903L, 1);
-  Visitor v2 = new Visitor("Dave", "Smith", "1134 Avalon", 5709139903L, 2);
+  private LBMS lbms;
+  private ArrayList<Long> isbns;
 
 
   @Before
-  public void before(){
+  public void beforeEach(){
     this.lbms = new LBMS();
+    this.isbns = new ArrayList<>();
+    this.isbns.add(9781450431835L);
+    this.isbns.add(9780375896798L);
   }
 
-  @Test
-  public void registerVisitor() {
-    this.lbms.registerVisitor(v1);
-    System.out.println("Test");
-  }
-
-  @Test
-  public void startVisit(){
-    lbms.startVisit(1);
-  }
 
   @Test
   public void endVisit() {
-    this.lbms.registerVisitor(v1);
-    this.lbms.registerVisitor(v2);
-    lbms.startVisit(1);
-    lbms.startVisit(2);
-    lbms.endVisit(1);
-    lbms.endVisit(2);
+    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
+    lbms.registerVisitor("Dave", "Smith", "1134 Avalon", 5709139903L);
+    lbms.startVisit("0000000001");
+    lbms.startVisit("0000000002");
+    lbms.endVisit("0000000001");
+    lbms.endVisit("0000000002");
   }
 
-  @Test
-  public void buyBooks() throws FileNotFoundException {
-    ArrayList isbns = new ArrayList();
-    isbns.add(9781450431835L);
-    isbns.add(9780375896798L);
-    this.lbms.buyBooks(isbns, 2);
-    ArrayList otherISBNS = new ArrayList();
-    otherISBNS.add(9781450431835L);
-    this.lbms.buyBooks(otherISBNS, 3);
-    System.out.println("Test");
-  }
 
   @Test
-  public void borrowBooks() throws FileNotFoundException{
-    lbms.registerVisitor(v1);
-    lbms.startVisit(v1.getVisitorID());
-    ArrayList isbns = new ArrayList();
-    isbns.add(9781450431835L);
-    isbns.add(9780375896798L);
+  public void findBorrowedBooks() throws FileNotFoundException{
+    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
+    lbms.startVisit("0000000001");
     lbms.buyBooks(isbns, 2);
-    lbms.borrowBook(v1.getVisitorID(), isbns);
-    System.out.println(":");
+    lbms.borrowBook("0000000001", isbns);
+    assertEquals(2, lbms.findBorrowedBooks().size());
   }
 
   @Test
-  public void findBorrowedBooks(){
-
+  public void returnBook() throws FileNotFoundException{
+    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
+    lbms.startVisit("0000000001");
+    lbms.buyBooks(isbns, 2);
+    lbms.borrowBook("0000000001", isbns);
+    this.isbns.add(9781450431835L);
+    lbms.returnBooks("0000000001", isbns);
+    assertEquals(1, lbms.findBorrowedBooks().size());
   }
 }

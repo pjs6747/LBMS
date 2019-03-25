@@ -28,20 +28,26 @@ public class Visitor{
   /**
    * Unique 10 digit visitor ID
    */
-  private long visitorID;
+  private String visitorID;
 
   /**
    *Keeps a list of all transactions (checked out boks) of a user
    */
   private ArrayList<Transaction> transactions;
 
+  /**
+   * Moneyed owed from late books
+   */
+  private int balance;
 
-  public Visitor(String firstName, String lastName, String address, long phoneNumber, long visitorID){
+
+  public Visitor(String firstName, String lastName, String address, long phoneNumber, String visitorID){
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.phoneNumber = phoneNumber;
     this.visitorID = visitorID;
+    this.balance = 0;
     this.transactions = new ArrayList<>();
   }
 
@@ -87,7 +93,7 @@ public class Visitor{
    * Gest ID
    * @return visitorID
    */
-  public long getVisitorID(){
+  public String getVisitorID(){
     return visitorID;
   }
 
@@ -96,4 +102,17 @@ public class Visitor{
   public String toString() {
     return this.firstName + " " + this.lastName;
   }
+
+
+  public void addBalance(int added) {
+    this.balance += added;
+  }
+
+
+  public void payBalance(int paided){
+    this.balance -= paided;
+  }
 }
+
+
+

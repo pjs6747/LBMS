@@ -10,22 +10,22 @@ public class Transaction {
     /***
      * Book that will be checked out
      */
-    Book book;
+    private Book book;
 
     /***
      * Visitor that will be checking out a book
      */
-    Visitor visitor;
+    private Visitor visitor;
 
     /***
      * Dated that the book is checked out
      */
-    LocalDate checkOutDate;
+    private LocalDate checkOutDate;
 
     /***
      * Dated the book is due back
      */
-    LocalDate dueBack;
+    private LocalDate dueBack;
 
     /***
      * Is the book returned
@@ -57,7 +57,7 @@ public class Transaction {
      */
     public LocalDate getDueBack() { return dueBack; }
 
-  public long getFine(LocalDate dateReturned) {
+  public int getFine(LocalDate dateReturned) {
       long daysLate = DAYS.between(dueBack, dateReturned);
       //Book is returned one week late
       if (daysLate > 0 && daysLate <= 7){
@@ -66,7 +66,7 @@ public class Transaction {
       //Book is returned more than one week late
       else if (daysLate > 7 && daysLate <= 17){
         long additionalCharge = 2*(daysLate-7);
-        return 10 + additionalCharge;
+        return 10 + (int) additionalCharge;
       }
       //Book reached its maximum fine
       else if (daysLate > 10){
@@ -77,4 +77,11 @@ public class Transaction {
         return 0;
       }
   }
+
+  public void returnBook(Time dateReturned){
+      this.isReturned = true;
+      this.visitor.addBalance(getFine(dateReturned.getDate()));
+  }
+
+
 }

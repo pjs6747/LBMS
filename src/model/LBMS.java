@@ -9,49 +9,51 @@ import java.util.Scanner;
 public class LBMS {
 
   Library library;
-  ArrayList<Visit> visits;
+  ArrayList<Visit> oldVisits;
   ArrayList<Visitor> visitors;
   ArrayList<Visit> openVisits;
   ArrayList<Transaction> transactions;
   File bookStoreFile;
   Time startTime;
   Time currentTime;
+  String newUserID;
 
 
 
   public LBMS(){
     library = new Library();
-    visits = new ArrayList<>();
+    oldVisits = new ArrayList<>();
     visitors = new ArrayList<>();
     openVisits = new ArrayList<>();
     transactions = new ArrayList<>();
     bookStoreFile = new File("SRC\\Files\\books");
+    newUserID = "0000000001";
     this.startTime = new Time();
     this.currentTime = new Time();
-    this.currentTime.run();
+//    this.currentTime.run();
   }
 
 
-  public void registerVisitor(Visitor visitor){
+  public void registerVisitor(String firstName, String lastName, String address, long phoneNumber){
+    Visitor visitor = new Visitor(firstName, lastName, address, phoneNumber, this.newUserID);
+    int temp = Integer.parseInt(this.newUserID);
+    temp++;
+    this.newUserID = String. format("%010d", temp);
     this.visitors.add(visitor);
   }
 
 
-  public void startVisit(long ID){
+  public void startVisit(String ID){
     this.openVisits.add(new Visit(findVisitor(ID), currentTime.getDate(),currentTime.getTime()));
   }
 
-  public void endVisit(long ID) {
-    for (Visitor visitor : visitors) {
-      if (visitor.getVisitorID() == ID) {
-        for (Visit visit : openVisits){
-          if (visit.getVisitor().getVisitorID() == ID){
-            visit.endVisit(currentTime.getTime());
-            openVisits.remove(visit);
-            visits.add(visit);
-            return;
-          }
-        }
+  public void endVisit(String ID) {
+    for (Visit visit : openVisits) {
+      if (visit.getVisitor().getVisitorID() == ID) {
+        visit.endVisit(currentTime.getTime());
+        openVisits.remove(visit);
+        oldVisits.add(visit);
+        return;
       }
     }
   }
@@ -79,7 +81,7 @@ public class LBMS {
   }
 
 
-  public void borrowBook(long id, ArrayList<String> books){
+  public void borrowBook(String id, ArrayList<Long> books){
     Visitor visitor = findVisitor(id);
     Visit visit = findVisit(visitor);
     ArrayList<Book> booksToBorrow = library.borrowBooks(books);
@@ -94,8 +96,24 @@ public class LBMS {
 
 
   public ArrayList<Transaction> findBorrowedBooks(){
-    return this.transactions;
+    ArrayList<Transaction> checkedOut = new ArrayList<>();
+    for (Transaction t : transactions){
+      if (!t.isReturned){
+        checkedOut.add(t);
+      }
+    }
+    return checkedOut;
   }
+
+
+  public void returnBooks(String id, ArrayList<Long> books){
+    ArrayList<Transaction> transactions = findTransactions(id, books);
+    for (Transaction t : transactions){
+      t.returnBook(this.currentTime);
+    }
+  }
+
+
 
 
   public void changeTime(long days, int  hours){
@@ -108,9 +126,9 @@ public class LBMS {
 
 
 
-  private Visitor findVisitor(long id){
+  private Visitor findVisitor(String id){
     for (Visitor visitor : visitors){
-      if (visitor.getVisitorID() == id){
+      if (visitor.getVisitorID().equals(id)){
         return visitor;
       }
     }
@@ -126,6 +144,15 @@ public class LBMS {
     return null;
   }
 
+  private ArrayList<Transaction> findTransactions(String id, ArrayList<Long> books){
+    ArrayList<Transaction> transactions = new ArrayList<>();
+    for (Transaction t : this.transactions){
+      if (t.getVisitor().getVisitorID() == id && books.contains(t.getBook().getIsbn())){
+        transactions.add(t);
+      }
+    }
+    return transactions;
+  }
 
 
 
