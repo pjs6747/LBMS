@@ -136,7 +136,6 @@ public class LBMS {
         this.transactions.add(newTrans);
       }
     }
-
   }
 
 
@@ -186,7 +185,9 @@ public class LBMS {
    */
   public void payFine(String ID, int amount){
     Visitor visitor = findVisitor(ID);
-    visitor.addBalance(amount);
+    if (visitor != null) {
+      visitor.addBalance(amount);
+    }
   }
 
 

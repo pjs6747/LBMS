@@ -109,8 +109,8 @@ public class Visitor{
   }
 
 
-  public void payBalance(int paided){
-    this.balance -= paided;
+  public void payBalance(int paid){
+    this.balance -= paid;
   }
 }
 
