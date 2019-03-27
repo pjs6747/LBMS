@@ -112,6 +112,10 @@ public class Visitor{
   public void payBalance(int paid){
     this.balance -= paid;
   }
+
+  public int getBalance(){
+    return this.balance;
+  }
 }
 
 
