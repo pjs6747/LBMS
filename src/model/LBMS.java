@@ -47,7 +47,7 @@ public class LBMS {
     newUserID = "0000000001";
     this.startTime = new Time();
     this.currentTime = new Time();
-//    this.currentTime.run();
+//    this.currentTime.run();     Currently allows nothing else to run
   }
 
 
@@ -176,6 +176,17 @@ public class LBMS {
   public void changeTime(long days, int  hours){
     this.currentTime.plusDays(days);
     this.currentTime.plusHours(hours);
+  }
+
+
+  /**
+   * Pays fine for the visitor ID
+   * @param ID Visitor that payed their fine
+   * @param amount Amount the visitor payed
+   */
+  public void payFine(String ID, int amount){
+    Visitor visitor = findVisitor(ID);
+    visitor.addBalance(amount);
   }
 
 
