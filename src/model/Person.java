@@ -43,7 +43,7 @@ public interface Person{
    * Gest ID
    * @return visitorID
    */
-  String getVisitorID();
+  String getID();
 
 
   /**

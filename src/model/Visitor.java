@@ -93,7 +93,7 @@ public class Visitor implements Person{
    * Gest ID
    * @return visitorID
    */
-  public String getVisitorID(){
+  public String getID(){
     return visitorID;
   }
 
