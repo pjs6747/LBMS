@@ -82,7 +82,7 @@ public class LBMS {
    */
   public void endVisit(String ID) {
     for (Visit visit : openVisits) {
-      if (visit.getVisitor().getVisitorID().equals(ID)) {
+      if (visit.getVisitor().getID().equals(ID)) {
         visit.endVisit(currentTime.getTime());
         openVisits.remove(visit);
         oldVisits.add(visit);
@@ -218,7 +218,7 @@ public class LBMS {
    */
   private Visitor findVisitor(String id){
     for (Visitor visitor : visitors){
-      if (visitor.getVisitorID().equals(id)){
+      if (visitor.getID().equals(id)){
         return visitor;
       }
     }
@@ -250,7 +250,7 @@ public class LBMS {
   private ArrayList<Transaction> findTransactions(String id, ArrayList<Long> books){
     ArrayList<Transaction> transactions = new ArrayList<>();
     for (Transaction t : this.transactions){
-      if (t.getVisitor().getVisitorID().equals(id) && books.contains(t.getBook().getIsbn())){
+      if (t.getVisitor().getID().equals(id) && books.contains(t.getBook().getIsbn())){
         transactions.add(t);
       }
     }
