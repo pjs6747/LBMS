@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Library {
 
-  ArrayList<Book> books;
+  private ArrayList<Book> books;
 
   public Library() {
     this.books = new ArrayList<>();
@@ -47,6 +47,7 @@ public class Library {
     }
     return booksToAdd;
   }
+
 }
 
 

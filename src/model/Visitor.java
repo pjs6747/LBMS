@@ -3,7 +3,7 @@ package model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Visitor{
+public class Visitor implements Person{
 
   /**
    * First Name of Visitor
