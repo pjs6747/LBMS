@@ -8,37 +8,38 @@ import java.util.Scanner;
 
 public class LBMS {
 
-  Library library;
-  ArrayList<Visit> visits;
-  ArrayList<Visitor> visitors;
-  ArrayList<Visit> openVisits;
-  ArrayList<Transaction> transactions;
-  File bookStoreFile;
-  Time startTime;
-  Time currentTime;
+  private static Library library;
+  private static ArrayList<Visit> visits;
+  private static ArrayList<Visitor> visitors;
+  private static ArrayList<Visit> openVisits;
+  private static ArrayList<Transaction> transactions;
+  private static File bookStoreFile;
+  private static Time startTime;
+  private static Time currentTime;
 
 
 
-  public LBMS(){
+  public LBMS() throws FileNotFoundException {
     library = new Library();
     visits = new ArrayList<>();
     visitors = new ArrayList<>();
     openVisits = new ArrayList<>();
     transactions = new ArrayList<>();
-    bookStoreFile = new File("SRC\\Files\\books");
-    this.startTime = new Time();
-    this.currentTime = new Time();
-    this.currentTime.run();
+    bookStoreFile = new File("src\\Files\\books");
+    startTime = new Time();
+    currentTime = new Time();
+    //this.currentTime.run();
+    populateLibrary();
   }
 
 
   public void registerVisitor(Visitor visitor){
-    this.visitors.add(visitor);
+    visitors.add(visitor);
   }
 
 
   public void startVisit(long ID){
-    this.openVisits.add(new Visit(findVisitor(ID), currentTime.getDate(),currentTime.getTime()));
+    openVisits.add(new Visit(findVisitor(ID), currentTime.getDate(),currentTime.getTime()));
   }
 
   public void endVisit(long ID) {
@@ -86,7 +87,7 @@ public class LBMS {
     for (Book bookToBorrow : booksToBorrow){
       if (bookToBorrow.checkBook()) {
         Transaction newTrans = new Transaction(bookToBorrow, visit);
-        this.transactions.add(newTrans);
+        transactions.add(newTrans);
       }
     }
 
@@ -94,17 +95,17 @@ public class LBMS {
 
 
   public ArrayList<Transaction> findBorrowedBooks(){
-    return this.transactions;
+    return transactions;
   }
 
 
   public void changeTime(long days, int  hours){
-    this.currentTime.plusDays(days);
-    this.currentTime.plusHours(hours);
+    currentTime.plusDays(days);
+    currentTime.plusHours(hours);
   }
 
 
-  public Time getTime(){return this.currentTime;}
+  public Time getTime(){return currentTime;}
 
 
 
@@ -126,6 +127,28 @@ public class LBMS {
     return null;
   }
 
+  public ArrayList<Visitor> getVisitors(){
+      return visitors;
+  }
+
+  private void populateLibrary() throws FileNotFoundException {
+      Scanner sc = new Scanner(bookStoreFile);
+      ArrayList<Book> booksToAdd = new ArrayList<>();
+      while (sc.hasNextLine()) {
+          String line = sc.nextLine();
+          String[] lineArray = line.split(",");
+          long isbn = Long.parseLong(lineArray[0]);
+          String title = lineArray[1];
+          String author = lineArray[2];
+          String publisher = lineArray[3];
+          String date = lineArray[4];
+          int pageNumber = Integer.parseInt(lineArray[5]);
+          Book newBook = new Book(isbn, title, author, publisher, date, pageNumber, 1);
+          booksToAdd.add(newBook);
+
+      }
+      library.addBooks(booksToAdd);
+  }
 
 
 

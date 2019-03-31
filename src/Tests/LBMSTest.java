@@ -6,19 +6,17 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.Assert.*;
 
 public class LBMSTest {
 
   LBMS lbms;
-  Visitor v1 = new Visitor("Tom", "Smith", "1134 Avalon", 5709139903L, 1);
-  Visitor v2 = new Visitor("Dave", "Smith", "1134 Avalon", 5709139903L, 2);
+  Visitor v1 = new Visitor("Tom", "Smith", "1134 Avalon", 5709139903L);
+  Visitor v2 = new Visitor("Dave", "Smith", "1134 Avalon", 5709139903L);
 
 
   @Before
-  public void before(){
+  public void before() throws FileNotFoundException {
     this.lbms = new LBMS();
   }
 

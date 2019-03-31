@@ -1,4 +1,4 @@
-package model.state;
+package model.State;
 
 /**
  * Closed used for state of library when it is closed

@@ -1,5 +1,7 @@
 package model.commands;
 
+
 public interface Command {
-    public void execute();
+    void execute();
+    String requestParams();
 }

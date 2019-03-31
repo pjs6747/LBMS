@@ -31,17 +31,17 @@ public class Visitor{
   private long visitorID;
 
   /**
-   *Keeps a list of all transactions (checked out boks) of a user
+   *Keeps a list of all transactions (checked out books) of a user
    */
   private ArrayList<Transaction> transactions;
 
 
-  public Visitor(String firstName, String lastName, String address, long phoneNumber, long visitorID){
+  public Visitor(String firstName, String lastName, String address, long phoneNumber){
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.phoneNumber = phoneNumber;
-    this.visitorID = visitorID;
+    this.visitorID = new UniqueIDGenerator().generateID();
     this.transactions = new ArrayList<>();
   }
 

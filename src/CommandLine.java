@@ -1,6 +1,8 @@
 import controller.ClientRequest;
-import java.io.BufferedInputStream;
+import model.LBMS;
+
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 
 /**
@@ -8,26 +10,29 @@ import java.io.InputStreamReader;
  */
 
 public class CommandLine{
-    
-    public static void main(String args[]){
-        String inputString;
-        String validCommmand;
+    public static void main(String args[]) throws FileNotFoundException {
 
         InputStreamReader ir = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(ir);
         ClientRequest cr = new ClientRequest();
 
+        LBMS lbms = new LBMS();
+
         System.out.println("Welcome to the Library. Type in a request to get started.\nIf you are new to the library, please type in 'login;'.");
 
         try {
-            inputString = br.readLine();
-            System.out.println("you said: " + inputString);
-            while(cr.validateRequest(inputString).equals("partial request")){
-                System.out.println(cr.PARTIAL_REQUEST);
-                inputString += br.readLine();
+            while(true) {
+                // System.out.println("you said: " + inputString);
+                while (!cr.validateRequest(br.readLine()).equals("valid request")) {
+                    System.out.println(cr.getRequestType());
+                    // inputString += br.readLine();
+                }
 
+                if (cr.getRequestType().equals("valid request")) {
+                    // System.out.println(cr.getRequestType());
+                    cr.validateRequest(br.readLine());
+                }
             }
-
 
         } catch (Exception e) {
             //TODO: handle exception
@@ -36,4 +41,7 @@ public class CommandLine{
 
     }
 
+//    public LBMS getLbms() {
+//        return this.lbms;
+//    }
 }

@@ -1,9 +1,9 @@
-package model.state;
+package model.State;
 
 /**
  * Open used for state of library when it is open
  */
-public class Open implements LibraryState{
+public class Open implements LibraryState {
 
     /**
      * States that the library is open
