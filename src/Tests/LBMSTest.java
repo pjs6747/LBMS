@@ -22,7 +22,7 @@ public class LBMSTest {
     this.isbns = new ArrayList<>();
     this.isbns.add(9781450431835L);
     this.isbns.add(9780375896798L);
-    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
+    //lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
     lbms.startVisit("0000000001");
     lbms.buyBooks(isbns, 2);
   }
@@ -30,8 +30,8 @@ public class LBMSTest {
 
   @Test
   public void endVisit() {
-    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
-    lbms.registerVisitor("Dave", "Smith", "1134 Avalon", 5709139903L);
+//    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
+//    lbms.registerVisitor("Dave", "Smith", "1134 Avalon", 5709139903L);
     lbms.startVisit("0000000001");
     lbms.startVisit("0000000002");
     lbms.endVisit("0000000001");

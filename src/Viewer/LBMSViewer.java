@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.LBMS;
 import model.commands.CommandLine;
 import controller.Observer;
 import javafx.application.Application;
@@ -27,6 +28,8 @@ public class LBMSViewer extends Application implements Observer<Book>{
     private Node left;
     private Node right;
     private HBox box;
+    private LBMS lbms = new LBMS();
+
 
     @Override
     public void start(Stage stage) {//throws Exception {
@@ -37,11 +40,12 @@ public class LBMSViewer extends Application implements Observer<Book>{
 
         TextField username = new TextField ();
         TextField password = new TextField ();
-        username.setText("Username");
-        password.setText("Password");
+        username.setPromptText("Username");
+        password.setPromptText("Password");
 
         Button login = new Button("Login");
         Button sign_up = new Button("Sign-up");
+        Label message = new Label();
 
 
         GridPane grid = new GridPane();
@@ -51,22 +55,33 @@ public class LBMSViewer extends Application implements Observer<Book>{
         grid.add(login, 1, 0);
         grid.add(username, 0, 0);
         grid.add(password, 0, 1);
+        grid.add(message,1, 2);
         grid.add(new Label("new user?"),1, 8);
         grid.add(sign_up,1, 9);
 
         sign_up.setOnAction(e ->{
-            SignUpPage signUp_bnt = new SignUpPage();
+            SignUpPage signUp_bnt = new SignUpPage(lbms);
             stage.getScene().setRoot(signUp_bnt.getRootPane());
             stage.setScene(signUp_bnt.getScene());
             stage.show();
         });
 
         login.setOnAction(e ->{
-            //if username in users.keys && users[username] = password;
-            searchPage searchPage_bnt = new searchPage();
-            stage.getScene().setRoot(searchPage_bnt.getRootPane());
-            stage.setScene(searchPage_bnt.getScene());
-            stage.show();
+            //if username in users.keys && users[username] = password
+            if(username.getText() == null || username.getText().isEmpty() || password.getText() == null || password.getText().isEmpty()){
+                message.setText("All fields must be filled out");
+            }else if(lbms.findVisitor(username.getText()) !=null){
+                if(lbms.findVisitor(username.getText()).getPassword() == password.getText()) {
+                    searchPage searchPage_bnt = new searchPage();
+                    stage.getScene().setRoot(searchPage_bnt.getRootPane());
+                    stage.setScene(searchPage_bnt.getScene());
+                    stage.show();
+                }else{
+                    message.setText("This password does not match");
+                }
+            }else{
+                message.setText("Cannot find this user");
+            }
         });
 
 

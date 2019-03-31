@@ -30,6 +30,8 @@ public class Visitor implements Person{
    */
   private String visitorID;
 
+  private String Password;
+
   /**
    *Keeps a list of all transactions (checked out boks) of a user
    */
@@ -41,12 +43,13 @@ public class Visitor implements Person{
   private int balance;
 
 
-  public Visitor(String firstName, String lastName, String address, long phoneNumber, String visitorID){
+  public Visitor(String firstName, String lastName, String address, long phoneNumber, String username, String password ){
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.phoneNumber = phoneNumber;
-    this.visitorID = visitorID;
+    this.Password = password;
+    this.visitorID = username;
     this.balance = 0;
     this.transactions = new ArrayList<>();
   }
@@ -115,6 +118,10 @@ public class Visitor implements Person{
 
   public int getBalance(){
     return this.balance;
+  }
+
+  public String getPassword() {
+    return Password;
   }
 }
 

@@ -58,11 +58,11 @@ public class LBMS {
    * @param address Address
    * @param phoneNumber Phone Number
    */
-  public void registerVisitor(String firstName, String lastName, String address, long phoneNumber){
-    Visitor visitor = new Visitor(firstName, lastName, address, phoneNumber, this.newUserID);
-    int temp = Integer.parseInt(this.newUserID);
-    temp++;
-    this.newUserID = String. format("%010d", temp);
+  public void registerVisitor(String firstName, String lastName, String address, long phoneNumber, String username, String password){
+    Visitor visitor = new Visitor(firstName, lastName, address, phoneNumber, username, password);
+//    int temp = Integer.parseInt(this.newUserID);
+//    temp++;
+//    this.newUserID = String. format("%010d", temp);
     this.visitors.add(visitor);
   }
 
@@ -216,7 +216,7 @@ public class LBMS {
    * @param id Visitor ID to search for
    * @return Visitor object with the specified id
    */
-  private Visitor findVisitor(String id){
+  public Visitor findVisitor(String id){
     for (Visitor visitor : visitors){
       if (visitor.getID().equals(id)){
         return visitor;

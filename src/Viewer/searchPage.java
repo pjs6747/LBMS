@@ -48,6 +48,7 @@ public class searchPage {
 
 
         search.setOnAction(e ->{
+            //System.out.println(search_field.getText());
             //if search option valid
             //return search results
             //else
