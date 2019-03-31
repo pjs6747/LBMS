@@ -1,5 +1,11 @@
 package controller;
 
+/*
+Project: LBMS
+File: ConsoleWriter
+Author: Group 4
+ */
+
 public interface ConsoleWriter {
 
     /**

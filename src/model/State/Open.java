@@ -1,5 +1,11 @@
 package model.State;
 
+/*
+Project: LBMS
+File: Open
+Author: Group 4
+ */
+
 /**
  * Open used for state of library when it is open
  */

@@ -1,5 +1,13 @@
 package model;
 
+/*
+Project: LBMS
+File: Transaction
+Author: Group 4
+ */
+
+import model.TransactionState.Returned;
+import model.TransactionState.TransactionContext;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,13 +39,14 @@ public class Transaction {
     /***
      * Is the book returned
      */
-    boolean isReturned;
+    private TransactionContext context;
 
     public Transaction(Book book, Visit visit){
         this.book = book;
         this.visitor = visit.getVisitor();
         this.checkOutDate = visit.getDate();
         this.dueBack = checkOutDate.plusDays(7);
+        this.context = new TransactionContext();
     }
 
     /**
@@ -90,9 +99,13 @@ public class Transaction {
      * @param dateReturned the date the book was returned
      */
     public void returnBook(Time dateReturned){
-        this.isReturned = true;
+        this.context.setState(new Returned());
         int fineOwed = getFine(dateReturned.getDate());
         this.visitor.addBalance(fineOwed);
         this.book.returnBook();
+    }
+
+    public boolean isReturned(){
+        return this.context.checkReturned();
     }
 }
