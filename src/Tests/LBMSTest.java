@@ -17,11 +17,14 @@ public class LBMSTest {
 
 
   @Before
-  public void beforeEach(){
+  public void beforeEach() throws FileNotFoundException{
     this.lbms = new LBMS();
     this.isbns = new ArrayList<>();
     this.isbns.add(9781450431835L);
     this.isbns.add(9780375896798L);
+    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
+    lbms.startVisit("0000000001");
+    lbms.buyBooks(isbns, 2);
   }
 
 
@@ -37,22 +40,27 @@ public class LBMSTest {
 
 
   @Test
-  public void findBorrowedBooks() throws FileNotFoundException{
-    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
-    lbms.startVisit("0000000001");
-    lbms.buyBooks(isbns, 2);
+  public void findBorrowedBooks() {
     lbms.borrowBook("0000000001", isbns);
     assertEquals(2, lbms.findBorrowedBooks().size());
   }
 
   @Test
-  public void returnBook() throws FileNotFoundException{
-    lbms.registerVisitor("Tom", "Smith", "1134 Avalon", 5709139903L);
-    lbms.startVisit("0000000001");
-    lbms.buyBooks(isbns, 2);
+  public void returnBook() {
     lbms.borrowBook("0000000001", isbns);
     this.isbns.add(9781450431835L);
     lbms.returnBooks("0000000001", isbns);
     assertEquals(1, lbms.findBorrowedBooks().size());
+  }
+
+  @Test
+  public void payFine() {
+    lbms.borrowBook("0000000001", isbns);
+    this.isbns.add(9781450431835L);
+    lbms.changeTime(30, 0);
+    lbms.returnBooks("0000000001", isbns);
+    assertEquals(5, lbms.payFine("0000000001", 25));
+    lbms.changeTime(30, 0);
+    assertEquals(0, lbms.payFine("0000000001", 5));
   }
 }

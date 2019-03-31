@@ -47,7 +47,7 @@ public class LBMS {
     newUserID = "0000000001";
     this.startTime = new Time();
     this.currentTime = new Time();
-//    this.currentTime.run();
+    //this.currentTime.run();     //Currently allows nothing else to run
   }
 
 
@@ -82,7 +82,7 @@ public class LBMS {
    */
   public void endVisit(String ID) {
     for (Visit visit : openVisits) {
-      if (visit.getVisitor().getVisitorID() == ID) {
+      if (visit.getVisitor().getID().equals(ID)) {
         visit.endVisit(currentTime.getTime());
         openVisits.remove(visit);
         oldVisits.add(visit);
@@ -96,7 +96,7 @@ public class LBMS {
    * Buys listed books
    * @param ids book isbns to buy
    * @param quantity number of each book to buy
-   * @throws FileNotFoundException
+   * @throws FileNotFoundException If the file containing book info
    */
   public void buyBooks(List ids, int quantity) throws FileNotFoundException {
     Scanner sc = new Scanner(bookStoreFile);
@@ -123,20 +123,19 @@ public class LBMS {
 
   /**
    * Borrows books listed for specified id
-   * @param id
-   * @param books
+   * @param id ID of the visitor borrowing
+   * @param books Books to borrow
    */
   public void borrowBook(String id, ArrayList<Long> books){
     Visitor visitor = findVisitor(id);
     Visit visit = findVisit(visitor);
     ArrayList<Book> booksToBorrow = library.borrowBooks(books);
     for (Book bookToBorrow : booksToBorrow){
-      if (bookToBorrow.checkBook()) {
+      if (bookToBorrow.checkBook() && visit != null) {
         Transaction newTrans = new Transaction(bookToBorrow, visit);
         this.transactions.add(newTrans);
       }
     }
-
   }
 
 
@@ -170,12 +169,27 @@ public class LBMS {
 
   /**
    * Changes time by days and hours
-   * @param days
-   * @param hours
+   * @param days Days to skip
+   * @param hours Hours to skip
    */
   public void changeTime(long days, int  hours){
     this.currentTime.plusDays(days);
     this.currentTime.plusHours(hours);
+  }
+
+
+  /**
+   * Pays fine for the visitor ID
+   * @param ID Visitor that payed their fine
+   * @param amount Amount the visitor payed
+   */
+  public int payFine(String ID, int amount){
+    Visitor visitor = findVisitor(ID);
+    if (visitor != null) {
+      visitor.payBalance(amount);
+      return visitor.getBalance();
+    }
+    return -1;
   }
 
 
@@ -204,7 +218,7 @@ public class LBMS {
    */
   private Visitor findVisitor(String id){
     for (Visitor visitor : visitors){
-      if (visitor.getVisitorID().equals(id)){
+      if (visitor.getID().equals(id)){
         return visitor;
       }
     }
@@ -236,7 +250,7 @@ public class LBMS {
   private ArrayList<Transaction> findTransactions(String id, ArrayList<Long> books){
     ArrayList<Transaction> transactions = new ArrayList<>();
     for (Transaction t : this.transactions){
-      if (t.getVisitor().getVisitorID() == id && books.contains(t.getBook().getIsbn())){
+      if (t.getVisitor().getID().equals(id) && books.contains(t.getBook().getIsbn())){
         transactions.add(t);
       }
     }

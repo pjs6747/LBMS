@@ -3,7 +3,7 @@ package model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Visitor{
+public class Visitor implements Person{
 
   /**
    * First Name of Visitor
@@ -93,7 +93,7 @@ public class Visitor{
    * Gest ID
    * @return visitorID
    */
-  public String getVisitorID(){
+  public String getID(){
     return visitorID;
   }
 
@@ -109,8 +109,12 @@ public class Visitor{
   }
 
 
-  public void payBalance(int paided){
-    this.balance -= paided;
+  public void payBalance(int paid){
+    this.balance -= paid;
+  }
+
+  public int getBalance(){
+    return this.balance;
   }
 }
 
