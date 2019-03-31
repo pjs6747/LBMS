@@ -1,5 +1,8 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Visit {
 
   /**
@@ -9,20 +12,20 @@ public class Visit {
   /**
    * Date of the visit
    */
-  private String Date;
+  private LocalDate Date;
 
   /**
    * Start time of visit
    */
-  private String startTime;
+  private LocalTime startTime;
 
   /**
    * End time of visit
    */
-  private String endTime;
+  private LocalTime endTime;
 
 
-  public Visit(Visitor visitor, String date, String startTime){
+  public Visit(Visitor visitor, LocalDate date, LocalTime startTime){
     this.visitor = visitor;
     this.startTime = startTime;
     this.Date = date;
@@ -30,10 +33,10 @@ public class Visit {
 
   /**
    * Records the time the visit ended
-   * @param endDate
+   * @param endTime
    */
-  public void endVisit(String endDate){
-    this.endTime = endDate;
+  public void endVisit(LocalTime endTime){
+    this.endTime = endTime;
   }
 
   /**
@@ -48,17 +51,17 @@ public class Visit {
    * Gets startDate
    * @return visit startDate
    */
-  public String getDate() {
+  public LocalDate getDate() {
     return Date;
   }
 
-  public String getStartTime(){return startTime;}
+  public LocalTime getStartTime(){return startTime;}
 
   /**
    * Gets endDate
    * @return visit endDate
    */
-  public String getEndTime() {
+  public LocalTime getEndTime() {
     return endTime;
   }
 

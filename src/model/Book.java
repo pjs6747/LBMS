@@ -136,6 +136,13 @@ public class Book {
     return false;
   }
 
+  /**
+   * Adds 1 to copies
+   */
+  public void returnBook(){
+    this.copies++;
+  }
+
   @Override
   public boolean equals(Object o){
     if (o instanceof Book){

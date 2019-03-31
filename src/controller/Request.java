@@ -1,5 +1,5 @@
 package controller;
 
 public interface Request{
-  public void execute();
+  public String execute(String requeString);
 }

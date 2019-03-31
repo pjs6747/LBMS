@@ -1,7 +1,8 @@
+package model.commands;
+
 import controller.ClientRequest;
 import controller.ConsoleWriter;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -9,7 +10,7 @@ import java.io.InputStreamReader;
  * Main class
  */
 
-public class CommandLine{
+public class CommandLine {
 
     private ConsoleWriter console;
     private boolean loopback = false;

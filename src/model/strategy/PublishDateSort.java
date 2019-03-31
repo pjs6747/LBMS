@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class TitleSort implements BookSort{
-    private Comparator<Book> TitleCompare = new Comparator<model.Book>() {
+public class PublishDateSort implements BookSort {
+    private Comparator<Book> DateCompare = new Comparator<model.Book>() {
         @Override
         public int compare(model.Book book1, model.Book book2) {
-            return book1.getTitle().toUpperCase().compareTo(book2.getTitle().toUpperCase());
+            return book1.getPublishDate().toUpperCase().compareTo(book2.getPublishDate().toUpperCase());
         }
     };
 
     @Override
     public void sort(ArrayList<Book> books) {
-        Collections.sort(books, TitleCompare);
+        Collections.sort(books, DateCompare);
     }
 }
