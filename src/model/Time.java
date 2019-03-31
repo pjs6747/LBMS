@@ -1,4 +1,9 @@
 package model;
+/*
+Project: LBMS
+File: Time
+Author: Group 4
+ */
 
 import java.time.LocalTime;
 import java.time.LocalDate;
@@ -15,6 +20,7 @@ public class Time extends Thread {
 
     private volatile boolean stop = false;
 
+
     /**
      * Uses a thread for the clock to tick every second
      */
@@ -30,12 +36,14 @@ public class Time extends Thread {
         }
     }
 
+
     /**
      * Constructor for a Time. time will start at the current time
      */
     public Time() {
         this.time = LocalDateTime.now();
     }
+
 
     /**
      * Constructor for a Time object after deserialization. creating time object from stored bytes
@@ -45,6 +53,7 @@ public class Time extends Thread {
         this.time = time;
     }
 
+
     /**
      * Gets the time of the system.
      * @return object of time as local time
@@ -52,6 +61,7 @@ public class Time extends Thread {
     public LocalTime getTime() {
         return this.time.toLocalTime();
     }
+
 
     /**
      * Gets the date of the system.
@@ -69,6 +79,7 @@ public class Time extends Thread {
         return this.time;
     }
 
+
     /**
      * Gets the case of the system date and time. If there isnt a case yet a new case is created
      * @return the case of the system date and time
@@ -79,6 +90,7 @@ public class Time extends Thread {
         }
         return timeCase;
     }
+
 
     /**
      * Gets the case of the system date time. If there isnt a case yet a new case is created.
@@ -95,6 +107,7 @@ public class Time extends Thread {
         return timeCase;
     }
 
+
     /**
      * Advances the date by number of days.
      * @param days: number of days to advance date
@@ -103,7 +116,15 @@ public class Time extends Thread {
         this.time = this.time.plusDays(days);
     }
 
-    public void plusHours(long hours){ this.time = this.time.plusHours(hours);}
+
+    /**
+     * Adds hours to the system time
+     * @param hours hours to add
+     */
+    public void plusHours(long hours){
+        this.time = this.time.plusHours(hours);
+    }
+
 
     /**
      * Creates a formatted string of the date and time.
@@ -122,7 +143,4 @@ public class Time extends Thread {
         }
         return false;
     }
-
-
-
 }
