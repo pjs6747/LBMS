@@ -146,7 +146,7 @@ public class LBMS {
   public ArrayList<Transaction> findBorrowedBooks(){
     ArrayList<Transaction> checkedOut = new ArrayList<>();
     for (Transaction t : transactions){
-      if (!t.isReturned){
+      if (!t.isReturned()){
         checkedOut.add(t);
       }
     }
