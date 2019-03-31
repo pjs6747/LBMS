@@ -9,6 +9,9 @@ Author: Group 4
 import model.TransactionState.Returned;
 import model.TransactionState.TransactionContext;
 
+import model.TransactionState.Returned;
+import model.TransactionState.TransactionContext;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
