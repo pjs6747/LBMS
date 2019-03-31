@@ -1,5 +1,11 @@
 package controller;
 
+/*
+Project: LBMS
+File: Observer
+Author: Group 4
+ */
+
 public interface Observer <E> {
 
     /**

@@ -1,5 +1,11 @@
 package model.State;
 
+/*
+Project: LBMS
+File: LibraryState
+Author: Group 4
+ */
+
 /**
  * Implementation of Library state made to use the 'State' design pattern
  */

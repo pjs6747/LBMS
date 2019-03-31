@@ -1,5 +1,11 @@
 package model.commands;
 
+/*
+Project: LBMS
+File: Search
+Author: Group 4
+ */
+
 public class Search implements Command{
     private String[] parsedRequest;
 

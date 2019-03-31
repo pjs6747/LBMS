@@ -4,6 +4,11 @@ import controller.ConsoleWriter;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+/*
+Project: LBMS
+File: CommandLine
+Author: Group 4
+ */
 
 /**
  * Main class

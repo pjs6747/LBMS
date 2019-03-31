@@ -1,5 +1,11 @@
 package model.commands;
 
+/*
+Project: LBMS
+File: CommandLine
+Author: Group 4
+ */
+
 import controller.ClientRequest;
 import controller.ConsoleWriter;
 
@@ -7,7 +13,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * Main class
+ * Read the command line
  */
 
 public class CommandLine {
@@ -15,16 +21,28 @@ public class CommandLine {
     private ConsoleWriter console;
     private boolean loopback = false;
 
+    /**
+     * constructor create console
+     * @param console
+     */
     private void constructorHelper (ConsoleWriter console) {
         //theBoard.createModel (NUM_ROWS, NUM_COLS, NUM_SHIPS);
         this.console = console;
     }
 
+    /**
+     * Writer method for command line
+     * @param console
+     */
     public CommandLine(ConsoleWriter console){
         constructorHelper(console);
         loopback = true;
     }
-    
+
+    /**
+     * Main run
+     * @param args
+     */
     public static void main(String args[]){
         String inputString;
         String validCommmand;
