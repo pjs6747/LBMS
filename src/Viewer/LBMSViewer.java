@@ -3,6 +3,7 @@ package Viewer;
 
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.commands.CommandLine;
@@ -50,13 +51,22 @@ public class LBMSViewer extends Application implements Observer<Book>{
         grid.add(login, 1, 0);
         grid.add(username, 0, 0);
         grid.add(password, 0, 1);
-        grid.add(new Label("new user?"),0, 2);
-        grid.add(sign_up,1, 2);
+        grid.add(new Label("new user?"),1, 8);
+        grid.add(sign_up,1, 9);
 
         sign_up.setOnAction(e ->{
-                Sign_up sign_up_bbt = new Sign_up();
-                stage.getScene().setRoot(sign_up_bbt.getRootPane());
+            SignUpPage signUp_bnt = new SignUpPage();
+            stage.getScene().setRoot(signUp_bnt.getRootPane());
+            stage.setScene(signUp_bnt.getScene());
+            stage.show();
+        });
 
+        login.setOnAction(e ->{
+            //if username in users.keys && users[username] = password;
+            searchPage searchPage_bnt = new searchPage();
+            stage.getScene().setRoot(searchPage_bnt.getRootPane());
+            stage.setScene(searchPage_bnt.getScene());
+            stage.show();
         });
 
 
@@ -114,8 +124,6 @@ public class LBMSViewer extends Application implements Observer<Book>{
         //"Search by Author, Title, ISBN, String publisher"
 
     }
-
-
 
     @Override
     public void update(Book pushValue) {
