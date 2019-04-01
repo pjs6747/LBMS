@@ -119,6 +119,17 @@ public class Visitor{
 
   public String getID(){return Long.toString(this.visitorID);}
 
+  public String getUserName(){return this.userName;}
+
+  @Override
+  public boolean equals(Object o){
+    if(o instanceof Visitor){
+      Visitor other = (Visitor) o;
+      return other.getUserName().equals(this.userName);
+    }
+    return false;
+  }
+
   @Override
   public String toString() {
     return this.firstName + " " + this.lastName;

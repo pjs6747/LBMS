@@ -112,7 +112,7 @@ public class LBMS {
 
   public Visitor findVisitor(String id){
     for (Visitor visitor : visitors){
-      if (visitor.getVisitorID() == id){
+      if (visitor.getUserName().equals(id)){
         return visitor;
       }
     }
