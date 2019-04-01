@@ -17,7 +17,7 @@ import java.util.ArrayList;
  public class ClientRequest implements Request{
 
     private String request = "";
-    private String PARTIAL_REQUEST = "partial request";
+    public String PARTIAL_REQUEST = "partial request";
     private String VALID_REQUEST = "valid request";
     private String DUPLICATE = "duplicate";
     private LBMS library = new LBMS();

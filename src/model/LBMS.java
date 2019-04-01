@@ -19,6 +19,7 @@ public class LBMS {
 
 
 
+
   public LBMS() throws FileNotFoundException {
     library = new Library();
     visits = new ArrayList<>();
@@ -29,20 +30,20 @@ public class LBMS {
     startTime = new Time();
     currentTime = new Time();
     //this.currentTime.run();
-    populateLibrary();
+//    populateLibrary(); not needed
   }
 
 
-  public void registerVisitor(Visitor visitor){
-    visitors.add(visitor);
+  public void registerVisitor(String fn, String ln, String address, long phoneNumber, String userName, String password){
+    visitors.add(new Visitor(fn, ln, address, phoneNumber, userName, password));
   }
 
 
-  public void startVisit(long ID){
+  public void startVisit(String ID){
     openVisits.add(new Visit(findVisitor(ID), currentTime.getDate(),currentTime.getTime()));
   }
 
-  public void endVisit(long ID) {
+  public void endVisit(String ID) {
     for (Visitor visitor : visitors) {
       if (visitor.getVisitorID() == ID) {
         for (Visit visit : openVisits){
@@ -80,7 +81,7 @@ public class LBMS {
   }
 
 
-  public void borrowBook(long id, ArrayList<String> books){
+  public void borrowBook(String id, ArrayList<String> books){
     Visitor visitor = findVisitor(id);
     Visit visit = findVisit(visitor);
     ArrayList<Book> booksToBorrow = library.borrowBooks(books);
@@ -109,7 +110,7 @@ public class LBMS {
 
 
 
-  private Visitor findVisitor(long id){
+  public Visitor findVisitor(String id){
     for (Visitor visitor : visitors){
       if (visitor.getVisitorID() == id){
         return visitor;

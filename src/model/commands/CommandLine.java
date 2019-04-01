@@ -10,6 +10,7 @@ import controller.ClientRequest;
 import controller.ConsoleWriter;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 
 /**
@@ -43,7 +44,7 @@ public class CommandLine {
      * Main run
      * @param args
      */
-    public static void main(String args[]){
+    public static void main(String args[]) throws FileNotFoundException {
         String inputString;
         String validCommmand;
 

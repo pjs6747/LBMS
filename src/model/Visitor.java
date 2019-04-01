@@ -35,12 +35,29 @@ public class Visitor{
    */
   private ArrayList<Transaction> transactions;
 
+  /**
+   * Balance a visitor owes
+   */
+  private int balance;
 
-  public Visitor(String firstName, String lastName, String address, long phoneNumber){
+  /**
+   * Username of visitor
+   */
+  private String userName;
+
+  /**
+   * Password for account
+   */
+  private String password;
+
+
+  public Visitor(String firstName, String lastName, String address, long phoneNumber, String userName, String password){
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.phoneNumber = phoneNumber;
+    this.userName = userName;
+    this.password = password;
     this.visitorID = new UniqueIDGenerator().generateID();
     this.transactions = new ArrayList<>();
   }
@@ -87,10 +104,20 @@ public class Visitor{
    * Gest ID
    * @return visitorID
    */
-  public long getVisitorID(){
-    return visitorID;
+  public String getVisitorID(){
+    return Long.toString(this.visitorID);
   }
 
+
+  public void addBalance(int amount){
+    this.balance += amount;
+  }
+
+  public String getPassword(){return this.password;}
+
+  public int getBalance(){return this.balance;}
+
+  public String getID(){return Long.toString(this.visitorID);}
 
   @Override
   public String toString() {

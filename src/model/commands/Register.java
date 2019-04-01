@@ -32,14 +32,17 @@ public class Register implements Command {
         String last_name;
         String address;
         long phone_number;
+        String username;
+        String password;
 
         first_name = parsedRequest[1];
         last_name = parsedRequest[2];
         address = parsedRequest[3];
         phone_number = Long.parseLong(parsedRequest[4]);
+        username = parsedRequest[5];
+        password = parsedRequest[6];
 
-        Visitor visitor = new Visitor(first_name, last_name, address, phone_number);
-        library.registerVisitor(visitor);
+        library.registerVisitor(first_name, last_name, address, phone_number, username, password);
         System.out.println("Successfully Registered");
     }
 

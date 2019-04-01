@@ -22,6 +22,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Book;
 
+import java.io.FileNotFoundException;
+
 
 public class LBMSViewer extends Application implements Observer<Book>{
 
@@ -29,11 +31,12 @@ public class LBMSViewer extends Application implements Observer<Book>{
     private Node left;
     private Node right;
     private HBox box;
-    private LBMS lbms = new LBMS();
+    private LBMS lbms;
 
 
     @Override
-    public void start(Stage stage) {//throws Exception {
+    public void start(Stage stage) throws FileNotFoundException {
+        this.lbms = new LBMS();
         ConcretConsoleWriter writer = new ConcretConsoleWriter(console);
         CommandLine command = new CommandLine(writer);
         stage.setTitle("Welcome to the LBMS");
@@ -128,6 +131,6 @@ public class LBMSViewer extends Application implements Observer<Book>{
 
     @Override
     public void update(Book pushValue) {
-        
+
     }
 }
