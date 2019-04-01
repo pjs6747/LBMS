@@ -12,20 +12,27 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import model.LBMS;
+import model.Visit;
+import model.Visitor;
 
 public class searchPage {
 
     private static Scene scene;
     private final BorderPane rootPane ; // or any other kind of pane, or  Group...
+    //UserHome userHome;
 
-    public searchPage() {
+    public searchPage(Visitor visitor, LBMS lbms, Stage stage) {
         rootPane = new BorderPane();
+        //this.userHome = userHome;
 
         // build UI, register event handlers, etc etc
         scene = new Scene(new Group(), 450, 250);
         TextField search_field = new TextField ();
-        search_field.setText("Search by Author, Title, ISBN, publisher");
+        search_field.setPromptText("Search by Author, Title, ISBN, publisher");
         Button search = new Button("search!");
+        Button back = new Button("go back!");
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "Author",
@@ -42,10 +49,10 @@ public class searchPage {
         grid.add(search_field, 1, 0);
         grid.add(search_options, 0, 0);
         grid.add(search,1, 3);
+        grid.add(back,10, 0);
 
         Group root = (Group) scene.getRoot();
         root.getChildren().add(grid);
-
 
         search.setOnAction(e ->{
             //System.out.println(search_field.getText());
@@ -54,6 +61,13 @@ public class searchPage {
             //else
             //Label label = new Label();
             //label.setText("This isn't a valid search.");
+        });
+
+        back.setOnAction(e ->{
+            UserHome userHome = new UserHome(visitor, lbms, stage);
+            stage.getScene().setRoot(userHome.getRootPane());
+            stage.setScene(userHome.getScene());
+            stage.show();
         });
     }
 

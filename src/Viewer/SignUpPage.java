@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import model.LBMS;
 import model.Visitor;
 
@@ -16,9 +17,13 @@ public class SignUpPage{
 
     private final BorderPane rootPane ; // or any other kind of pane, or  Group...
     Scene scene;
+    Stage stage;
+    LBMS lbms;
 
-    public SignUpPage(LBMS lbms) {
+    public SignUpPage(LBMS lbms, Stage stage) {
         rootPane = new BorderPane();
+        this.stage = stage;
+        this.lbms = lbms;
 
         // build UI, register event handlers, etc etc
         scene = new Scene(new Group(), 450, 250);
@@ -63,16 +68,18 @@ public class SignUpPage{
                 lbms.registerVisitor(fName.getText(), lName.getText(), address.getText(), Long.parseLong(phoneNum.getText()), username.getText(), password.getText());
                 lbms.startVisit(username.getText());
                 message.setText("You have successfully signed up");
-                searchPage searchPage = new searchPage();
-                scene = searchPage.getScene();
+                UserHome userHome = new UserHome(lbms.findVisitor(username.getText()), lbms, stage);
+                stage.getScene().setRoot(userHome.getRootPane());
+                stage.setScene(userHome.getScene());
+                stage.show();
                 }else{message.setText("phone number must be all numbers");}
             }
-            });
-        }
+        });
+    }
 
-        public Pane getRootPane() {
-            return rootPane ;
-        }
+    public Pane getRootPane() {
+        return rootPane ;
+    }
 
     public Scene getScene() {
         return scene;
