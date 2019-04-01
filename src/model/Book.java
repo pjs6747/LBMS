@@ -5,6 +5,11 @@ File: Book
 Author: Group 4
  */
 
+import model.GoogleBook.GoogleBookRepsonse;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Book {
 
 
@@ -21,7 +26,7 @@ public class Book {
     /**
      * The author of the book
      */
-    private String author;
+    private ArrayList<String> author;
 
     /**
      * The publisher of the book
@@ -48,11 +53,22 @@ public class Book {
      */
     private int copiesCheckedOut;
 
+    public Book(GoogleBookRepsonse responseBook) {
+        this.isbn = Integer.parseInt(responseBook.volumeInfo.industryIdentifiers[1].identifier);
+        this.title = responseBook.volumeInfo.title;
+        this.author = new ArrayList<>(Arrays.asList(responseBook.volumeInfo.authors));
+        this.publisher = responseBook.volumeInfo.publisher;
+        this.publishDate = responseBook.volumeInfo.publishedDate;
+        this.PageCount = Integer.parseInt(responseBook.volumeInfo.pageCount);
+        this.copies = 1;
+        this.copiesCheckedOut = 0;
+    }
 
     public Book(long isbn, String title, String author, String publisher, String publishDate, int pageCount, int copies){
         this.isbn = isbn;
         this.title = title;
-        this.author = author;
+        this.author = new ArrayList<>();
+        this.author.add(author);
         this.publisher = publisher;
         this.publishDate = publishDate;
         this.PageCount = pageCount;
@@ -76,7 +92,7 @@ public class Book {
      * Gets author
      * @return Book author
      */
-    public String getAuthor() {
+    public ArrayList<String> getAuthor() {
         return author;
     }
 
