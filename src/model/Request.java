@@ -16,7 +16,7 @@ import model.GoogleBook.GoogleBookRepsonse;
 
 public class Request {
 
-    public static ArrayList<Book> buyBooksFromGoogle(String[] isbns) {
+    public static ArrayList<Book> buyBooksFromGoogle(String[] isbns, int quantity) {
         ArrayList<Book> books = new ArrayList<>();
 
         for (String isbn: isbns) {
@@ -27,7 +27,7 @@ public class Request {
             // Parse response to object
             Gson gson = new Gson();
             GoogleBookRepsonse responseObj = gson.fromJson(response,GoogleBookRepsonse.class);
-            books.add(new Book(responseObj));
+            books.add(new Book(responseObj, quantity));
         }
 
         return books;

@@ -80,6 +80,9 @@ public class LBMS {
     library.addBooks(booksToAdd);
   }
 
+  public void buyBooksGoogle(String[] ids, int quantity) {
+    library.addBooks(Request.buyBooksFromGoogle(ids, quantity));
+  }
 
   public void borrowBook(String id, ArrayList<String> books){
     Visitor visitor = findVisitor(id);
@@ -93,7 +96,6 @@ public class LBMS {
     }
 
   }
-
 
   public ArrayList<Transaction> findBorrowedBooks(){
     return transactions;

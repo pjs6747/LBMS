@@ -53,14 +53,14 @@ public class Book {
      */
     private int copiesCheckedOut;
 
-    public Book(GoogleBookRepsonse responseBook) {
+    public Book(GoogleBookRepsonse responseBook, int quantity) {
         this.isbn = Integer.parseInt(responseBook.volumeInfo.industryIdentifiers[1].identifier);
         this.title = responseBook.volumeInfo.title;
         this.author = new ArrayList<>(Arrays.asList(responseBook.volumeInfo.authors));
         this.publisher = responseBook.volumeInfo.publisher;
         this.publishDate = responseBook.volumeInfo.publishedDate;
         this.PageCount = Integer.parseInt(responseBook.volumeInfo.pageCount);
-        this.copies = 1;
+        this.copies = quantity;
         this.copiesCheckedOut = 0;
     }
 
