@@ -1,53 +1,38 @@
 import controller.ClientRequest;
-import controller.ConsoleWriter;
+import model.LBMS;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-/*
-Project: LBMS
-File: CommandLine
-Author: Group 4
- */
 
 /**
  * Main class
  */
 
 public class CommandLine{
-
-    private ConsoleWriter console;
-    private boolean loopback = false;
-
-    private void constructorHelper (ConsoleWriter console) {
-        //theBoard.createModel (NUM_ROWS, NUM_COLS, NUM_SHIPS);
-        this.console = console;
-    }
-
-    public CommandLine(ConsoleWriter console){
-        constructorHelper(console);
-        loopback = true;
-    }
-    
-    public static void main(String args[]){
-        String inputString;
-        String validCommmand;
+    public static void main(String args[]) throws FileNotFoundException {
 
         InputStreamReader ir = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(ir);
         ClientRequest cr = new ClientRequest();
 
+        LBMS lbms = new LBMS();
+
         System.out.println("Welcome to the Library. Type in a request to get started.\nIf you are new to the library, please type in 'login;'.");
 
         try {
-            inputString = br.readLine();
-            System.out.println("you said: " + inputString);
-            while(cr.validateRequest(inputString).equals("partial request")){
-                System.out.println(cr.PARTIAL_REQUEST);
-                inputString += br.readLine();
+            while(true) {
+                // System.out.println("you said: " + inputString);
+                while (!cr.validateRequest(br.readLine()).equals("valid request")) {
+                    System.out.println(cr.getRequestType());
+                    // inputString += br.readLine();
+                }
 
+                if (cr.getRequestType().equals("valid request")) {
+                    // System.out.println(cr.getRequestType());
+                    cr.validateRequest(br.readLine());
+                }
             }
-
 
         } catch (Exception e) {
             //TODO: handle exception
@@ -56,4 +41,7 @@ public class CommandLine{
 
     }
 
+//    public LBMS getLbms() {
+//        return this.lbms;
+//    }
 }

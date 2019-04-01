@@ -1,14 +1,7 @@
 package controller;
 
-/*
-Project: LBMS
-File: Request
-Author: Group 4
- */
+import java.io.FileNotFoundException;
 
-/**
- * execute the client request
- */
 public interface Request{
-    public String execute(String requeString);
+  public String execute(String requeString) throws FileNotFoundException;
 }
